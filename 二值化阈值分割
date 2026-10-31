@@ -1,0 +1,21 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+using namespace cv;
+using namespace std;
+
+int main() {
+    Mat src = imread("test.jpg");
+    Mat gray, binary;
+    cvtColor(src, gray, COLOR_BGR2GRAY);
+
+    double thresh = 127;  // 阈值：大于127变白，小于变黑
+    threshold(gray, binary, thresh, 255, THRESH_BINARY);
+    imwrite("binary.jpg", binary);
+
+    cout << "Binary non-zero pixels: " << countNonZero(binary) << endl;
+
+    imshow("3-Binary", binary);
+    waitKey(0);
+    destroyAllWindows();
+    return 0;
+}
