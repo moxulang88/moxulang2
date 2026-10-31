@@ -1,0 +1,18 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+using namespace cv;
+using namespace std;
+
+int main() {
+    Mat src = imread("test.jpg");
+    Mat gray;
+    cvtColor(src, gray, COLOR_BGR2GRAY);  // BGR转灰度
+    imwrite("gray.jpg", gray);
+
+    cout << "Grayscale non-zero pixels: " << countNonZero(gray) << endl;
+
+    imshow("2-Grayscale", gray);
+    waitKey(0);
+    destroyAllWindows();
+    return 0;
+}
