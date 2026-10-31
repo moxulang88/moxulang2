@@ -1,0 +1,14 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    string s;
+    getline(cin, s);
+    stringstream ss(s);
+    vector<string> v;
+    string m;
+    while (ss >> m) v.push_back(m);
+    cout << "单词数：" << v.size() << endl;
+    for (int i = v.size()-1; i >= 0; i--) cout << v[i] << " ";
+    return 0;
+}
