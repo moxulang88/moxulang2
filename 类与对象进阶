@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Student {
+private:
+    string name;
+    string id;
+    int* scores;
+    int numScores;
+public:
+    Student(string n, string sid, int* s, int num)
+        : name(n), id(sid), numScores(num) {
+        scores = new int[numScores];
+        for (int i = 0; i < numScores; i++) {
+            scores[i] = s[i];
+        }
+    }
+
+    // 深拷贝构造函数
+    Student(const Student& other) {
+        name = other.name;
+        id = other.id;
+        numScores = other.numScores;
+        scores = new int[numScores];
+        for (int i = 0; i < numScores; i++) {
+            scores[i] = other.scores[i];
+        }
+    }
+
+    ~Student() {
+        delete[] scores;
+        scores = NULL;
+    }
+
+    void setScore(int index, int score) {
+        if (index >= 0 && index < numScores) {
+            scores[index] = score;
+        }
+    }
+
+    void print() {
+        cout << "姓名：" << name << endl;
+        cout << "学号：" << id << endl;
+        cout << "成绩：";
+        for (int i = 0; i < numScores; i++) {
+            cout << scores[i] << " ";
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    int arr[] = {85, 90, 78};
+    Student stu1("张三", "2025001", arr, 3);
+    Student stu2 = stu1;
+
+    stu1.setScore(0, 95);
+
+    cout << "=== stu1 ===" << endl;
+    stu1.print();
+    cout << endl << "=== stu2 ===" << endl;
+    stu2.print();
+
+    return 0;
+}
