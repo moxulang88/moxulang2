@@ -1,0 +1,21 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+using namespace cv;
+using namespace std;
+
+int main() {
+    Mat src = imread("test.jpg");
+    Mat resized;
+
+    double scale = 0.5;  // 缩小为原来的一半
+    resize(src, resized, Size(), scale, scale, INTER_LINEAR);
+    imwrite("resized.jpg", resized);
+
+    cout << "Original: " << src.cols << "x" << src.rows << endl;
+    cout << "Resized: " << resized.cols << "x" << resized.rows << endl;
+
+    imshow("5-Resized", resized);
+    waitKey(0);
+    destroyAllWindows();
+    return 0;
+}
