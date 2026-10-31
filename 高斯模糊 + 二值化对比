@@ -1,0 +1,28 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+using namespace cv;
+using namespace std;
+
+int main() {
+    Mat src = imread("test.jpg");
+    Mat gray, blurred, binaryDirect, binaryBlurred;
+
+    cvtColor(src, gray, COLOR_BGR2GRAY);
+
+    // 直接二值化
+    threshold(gray, binaryDirect, 127, 255, THRESH_BINARY);
+
+    // 先高斯模糊再二值化
+    GaussianBlur(gray, blurred, Size(5, 5), 0);
+    threshold(blurred, binaryBlurred, 127, 255, THRESH_BINARY);
+    imwrite("blurred_binary.jpg", binaryBlurred);
+
+    cout << "Direct binary pixels: " << countNonZero(binaryDirect) << endl;
+    cout << "Blurred binary pixels: " << countNonZero(binaryBlurred) << endl;
+    cout << "Difference: " << abs(countNonZero(binaryDirect) - countNonZero(binaryBlurred)) << endl;
+
+    imshow("7-Blurred Binary", binaryBlurred);
+    waitKey(0);
+    destroyAllWindows();
+    return 0;
+}
