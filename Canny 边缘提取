@@ -1,0 +1,22 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+using namespace cv;
+using namespace std;
+
+int main() {
+    Mat src = imread("test.jpg");
+    Mat gray, edges;
+
+    cvtColor(src, gray, COLOR_BGR2GRAY);
+
+    // Canny边缘：低阈值50，高阈值150
+    Canny(gray, edges, 50, 150, 3);
+    imwrite("canny_edges.jpg", edges);
+
+    cout << "Edge pixels: " << countNonZero(edges) << endl;
+
+    imshow("8-Canny Edges", edges);
+    waitKey(0);
+    destroyAllWindows();
+    return 0;
+}
